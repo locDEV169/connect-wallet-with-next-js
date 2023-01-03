@@ -8,11 +8,13 @@ const Header = () => {
       <Container maxW="container.xl" p={'10px'}>
         <Flex align="center" justify="space-between">
           <MoralisLogo />
-          <NavBar />
-          <HStack gap={'10px'}>
-            <ConnectButton />
-            <ColorModeButton />
-          </HStack>
+          <div style={{ display: 'flex' }}>
+            <NavBar />
+            <HStack gap={'10px'}>
+              <ConnectButton />
+              <ColorModeButton />
+            </HStack>
+          </div>
         </Flex>
       </Container>
     </Box>
