@@ -1,11 +1,8 @@
-import {
-  Box, Heading, Table, TableContainer, Tbody,
-  Td, Th, Thead,
-  Tr, useColorModeValue
-} from '@chakra-ui/react';
+import { Box, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react';
 import { useEvmWalletNFTTransfers } from '@moralisweb3/next';
 import { useTrezorAccount } from 'hooks/useTrezor';
 import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import { useNetwork } from 'wagmi';
 
 const TrezorAccount = () => {
@@ -19,9 +16,13 @@ const TrezorAccount = () => {
 
   const { trezorAccounts, getFullAccounts } = useTrezorAccount();
 
-  // useEffect(() => console.log('transfers: ', transfers, data), [transfers]);
+  useEffect(() => console.log('transfers: ', transfers, data), []);
 
-  console.log(trezorAccounts);
+  const onClick = (value: string) => {
+    console.log(value);
+  };
+  console.log('data', data, 'chain', chain, trezorAccounts);
+  
 
   return (
     <>
@@ -40,7 +41,12 @@ const TrezorAccount = () => {
               </Thead>
               <Tbody>
                 {trezorAccounts?.map((account: any, key: number) => (
-                  <Tr key={key} _hover={{ bgColor: hoverTrColor }} cursor="pointer">
+                  <Tr
+                    key={key}
+                    _hover={{ bgColor: hoverTrColor }}
+                    cursor="pointer"
+                    onClick={() => onClick(account.address)}
+                  >
                     <Td>{key + 1}</Td>
                     <Td>{account.address}</Td>
                   </Tr>
