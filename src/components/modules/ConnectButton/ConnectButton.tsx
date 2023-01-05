@@ -1,11 +1,13 @@
-import { InjectedConnector } from 'wagmi/connectors/injected';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
-import { Button, Text, HStack, Avatar, useToast } from '@chakra-ui/react';
-import { getEllipsisTxt } from 'utils/format';
+import { Avatar, Button, HStack, Text, useToast } from '@chakra-ui/react';
 import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
 import { useTrezor } from 'components/Trezor';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+import { web3Actions } from 'stores/web3-slice';
+import { getEllipsisTxt } from 'utils/format';
+import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
+import { InjectedConnector } from 'wagmi/connectors/injected';
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });
@@ -16,6 +18,7 @@ const ConnectButton = () => {
   const { data } = useSession();
   const { requestChallengeAsync } = useAuthRequestChallengeEvm();
   const { getAccounts } = useTrezor();
+  const dispatch = useDispatch();
 
   const handleAuth = async () => {
     // await getAccounts();
@@ -51,8 +54,8 @@ const ConnectButton = () => {
     try {
       await getAccounts();
       const account = await getAccounts();
-      console.log(account);
-
+      console.log('connected Trezor',account);
+      dispatch(web3Actions.setTrezorAccounts(account));
       // const challenge = await requestChallengeAsync({ address: account[0].address, chainId: chain.id });
 
       // if (!challenge) {

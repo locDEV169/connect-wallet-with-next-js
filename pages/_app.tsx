@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { createClient, WagmiConfig } from 'wagmi';
+import { Provider } from 'react-redux';
 import { configureChains } from '@wagmi/core';
 import {
   arbitrum,
@@ -24,6 +25,8 @@ import { publicProvider } from 'wagmi/providers/public';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import { TrezorProvider } from 'components/Trezor';
+import { store } from 'stores/store';
+
 
 const { provider, webSocketProvider } = configureChains(
   [
@@ -62,6 +65,7 @@ const theme = extendTheme({ config });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
+    <Provider store={store}>
     <ChakraProvider resetCSS theme={theme}>
       <WagmiConfig client={client}>
         <SessionProvider session={pageProps.session} refetchInterval={0}>
@@ -71,6 +75,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         </SessionProvider>
       </WagmiConfig>
     </ChakraProvider>
+    </Provider>
   );
 };
 
