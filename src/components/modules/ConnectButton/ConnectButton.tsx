@@ -4,6 +4,8 @@ import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { Button, Text, HStack, Avatar, useToast } from '@chakra-ui/react';
 import { getEllipsisTxt } from 'utils/format';
 import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
+import { useTrezor } from 'components/Trezor';
+import { Fragment } from 'react';
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });
@@ -13,8 +15,11 @@ const ConnectButton = () => {
   const toast = useToast();
   const { data } = useSession();
   const { requestChallengeAsync } = useAuthRequestChallengeEvm();
+  const { getAccounts } = useTrezor();
 
   const handleAuth = async () => {
+    // await getAccounts();
+
     if (isConnected) {
       await disconnectAsync();
     }
@@ -41,6 +46,10 @@ const ConnectButton = () => {
     }
   };
 
+  const handleConnectTrezor = async () => {
+    await getAccounts();
+  }
+
   const handleDisconnect = async () => {
     await disconnectAsync();
     signOut({ callbackUrl: '/' });
@@ -56,9 +65,14 @@ const ConnectButton = () => {
   }
 
   return (
-    <Button size="sm" onClick={handleAuth} colorScheme="blue">
-      Connect Wallet
-    </Button>
+    <Fragment>
+      <Button size="sm" onClick={handleAuth} colorScheme="blue">
+        Connect Wallet
+      </Button>
+      <Button size="sm" onClick={handleConnectTrezor} colorScheme="blue">
+        Connect Trezor
+      </Button>
+    </Fragment>
   );
 };
 
