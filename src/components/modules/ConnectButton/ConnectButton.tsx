@@ -27,7 +27,7 @@ const ConnectButton = () => {
       const { account, chain } = await connectAsync();
       console.log('chain', chain);
       const challenge = await requestChallengeAsync({ address: account, chainId: chain.id });
-
+      console.log('challenge', challenge);
       if (!challenge) {
         throw new Error('No challenge received');
       }
@@ -47,7 +47,31 @@ const ConnectButton = () => {
   };
 
   const handleConnectTrezor = async () => {
-    await getAccounts();
+    
+    try {
+      await getAccounts();
+      const account = await getAccounts();
+      console.log(account);
+
+      // const challenge = await requestChallengeAsync({ address: account[0].address, chainId: chain.id });
+
+      // if (!challenge) {
+      //   throw new Error('No challenge received');
+      // }
+
+      // const signature = await signMessageAsync({ message: challenge.message });
+
+      // await signIn('moralis-auth', { message: challenge.message, signature, network: 'Evm', redirect: false });
+      
+    } catch (e) {
+      toast({
+        title: 'Oops, something went wrong...',
+        description: (e as { message: string })?.message,
+        status: 'error',
+        position: 'top-right',
+        isClosable: true,
+      });
+    }
   }
 
   const handleDisconnect = async () => {
