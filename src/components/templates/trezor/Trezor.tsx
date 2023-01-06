@@ -1,28 +1,24 @@
 import { Box, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react';
-import { useEvmWalletNFTTransfers } from '@moralisweb3/next';
+import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
+import { useTrezor } from 'components/Trezor';
 import { useTrezorAccount } from 'hooks/useTrezor';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { useNetwork } from 'wagmi';
+import { useNetwork, useSignMessage } from 'wagmi';
 
 const TrezorAccount = () => {
   const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
   const { data } = useSession();
   const { chain } = useNetwork();
-  const { data: transfers } = useEvmWalletNFTTransfers({
-    address: data?.user?.address,
-    chain: chain?.id,
-  });
 
   const { trezorAccounts, getFullAccounts } = useTrezorAccount();
+  const { signWallet } = useTrezor();
 
-  useEffect(() => console.log('transfers: ', transfers, data), []);
-
-  const onClick = (value: string) => {
-    console.log(value);
-  };
+  // useEffect(() => console.log('transfers: ', data), []);
   console.log('data', data, 'chain', chain, trezorAccounts);
-  
+
+  const onClick = async (address: string, serializedPath: string) => {
+    signWallet(address, serializedPath);
+  };
 
   return (
     <>
@@ -35,20 +31,17 @@ const TrezorAccount = () => {
             <Table>
               <Thead>
                 <Tr>
-                  <Th>Token Id</Th>
+                  <Th>Id</Th>
                   <Th>Address</Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {trezorAccounts?.map((account: any, key: number) => (
-                  <Tr
-                    key={key}
-                    _hover={{ bgColor: hoverTrColor }}
-                    cursor="pointer"
-                    onClick={() => onClick(account.address)}
-                  >
+                  <Tr key={key} _hover={{ bgColor: hoverTrColor }} cursor="pointer">
                     <Td>{key + 1}</Td>
-                    <Td>{account.address}</Td>
+                    <Td onClick={() => onClick(account.address, account.serializedPath)}>{account.address}</Td>
+                    {/* <>{readBalance(account.address)}</> */}
+                    {/* <Td>{getBalance(account.address)}</Td> */}
                   </Tr>
                 ))}
               </Tbody>

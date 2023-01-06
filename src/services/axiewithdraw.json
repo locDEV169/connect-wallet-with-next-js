@@ -1,0 +1,1097 @@
+[
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "nonce",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "assets",
+                "type": "tuple[]",
+                "components": [
+                    {
+                        "internal_type": "",
+                        "name": "erc",
+                        "type": "uint8"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "addr",
+                        "type": "address"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "quantity",
+                        "type": "uint256"
+                    }
+                ]
+            }
+        ],
+        "name": "Deposited",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "version",
+                "type": "uint8"
+            }
+        ],
+        "name": "Initialized",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "blocks",
+                "type": "uint256"
+            }
+        ],
+        "name": "MinWithdrawalPeriodUpdated",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "Paused",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "usdc",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "withdrawalFeeInUsdc",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "paymentToken",
+                "type": "address"
+            }
+        ],
+        "name": "PaymentUpdated",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "previousAdminRole",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "newAdminRole",
+                "type": "bytes32"
+            }
+        ],
+        "name": "RoleAdminChanged",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
+        "name": "RoleGranted",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
+        "name": "RoleRevoked",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "routerContract",
+                "type": "address"
+            }
+        ],
+        "name": "RouterContractUpdated",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "TreasuryUpdated",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "Unpaused",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "nonce",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "assets",
+                "type": "tuple[]",
+                "components": [
+                    {
+                        "internal_type": "",
+                        "name": "erc",
+                        "type": "uint8"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "addr",
+                        "type": "address"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "quantity",
+                        "type": "uint256"
+                    }
+                ]
+            },
+            {
+                "internal_type": "",
+                "name": "extraData",
+                "type": "bytes"
+            }
+        ],
+        "name": "Withdrew",
+        "outputs": null,
+        "payable": false,
+        "stateMutability": "",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "DEFAULT_ADMIN_ROLE",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "DOMAIN_SEPARATOR",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "PORTAL_OPERATOR",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_assets",
+                "type": "tuple[]",
+                "components": [
+                    {
+                        "internal_type": "",
+                        "name": "erc",
+                        "type": "uint8"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "addr",
+                        "type": "address"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "quantity",
+                        "type": "uint256"
+                    }
+                ]
+            },
+            {
+                "internal_type": "",
+                "name": "_paymentToken",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_path",
+                "type": "address[]"
+            }
+        ],
+        "name": "calculateWithdrawalFee",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "_paymentAmount",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "_paymentAmountInUsdc",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_assets",
+                "type": "tuple[]",
+                "components": [
+                    {
+                        "internal_type": "",
+                        "name": "erc",
+                        "type": "uint8"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "addr",
+                        "type": "address"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "quantity",
+                        "type": "uint256"
+                    }
+                ]
+            }
+        ],
+        "name": "deposit",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getRoleAdmin",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "getRoleMember",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getRoleMemberCount",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "grantRole",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "hasRole",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_minWithdrawalPeriod",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "_routerContract",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_usdc",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_withdrawalFeeInUsdc",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "_paymentToken",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_treasury",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_operators",
+                "type": "address[]"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "lastWithdrawalBlock",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "minWithdrawalPeriod",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "nonce",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256[]"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256[]"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes"
+            }
+        ],
+        "name": "onERC1155BatchReceived",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes4"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes"
+            }
+        ],
+        "name": "onERC1155Received",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes4"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes"
+            }
+        ],
+        "name": "onERC721Received",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bytes4"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "pause",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "paused",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "paymentToken",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "renounceRole",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internal_type": "",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "revokeRole",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "routerContract",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_blocks",
+                "type": "uint256"
+            }
+        ],
+        "name": "setMinWithdrawalPeriod",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_usdc",
+                "type": "address"
+            },
+            {
+                "internal_type": "",
+                "name": "_withdrawalFeeInUsdc",
+                "type": "uint256"
+            },
+            {
+                "internal_type": "",
+                "name": "_paymentToken",
+                "type": "address"
+            }
+        ],
+        "name": "setPayment",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_routerContract",
+                "type": "address"
+            }
+        ],
+        "name": "setRouterContract",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_treasury",
+                "type": "address"
+            }
+        ],
+        "name": "setTreasury",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "interfaceId",
+                "type": "bytes4"
+            }
+        ],
+        "name": "supportsInterface",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "treasury",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "unpause",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "usdc",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internal_type": "",
+                "name": "_withdrawal",
+                "type": "tuple",
+                "components": [
+                    {
+                        "internal_type": "",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "nonce",
+                        "type": "uint256"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "expiredAt",
+                        "type": "uint256"
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "assets",
+                        "type": "tuple[]",
+                        "components": [
+                            {
+                                "internal_type": "",
+                                "name": "erc",
+                                "type": "uint8"
+                            },
+                            {
+                                "internal_type": "",
+                                "name": "addr",
+                                "type": "address"
+                            },
+                            {
+                                "internal_type": "",
+                                "name": "id",
+                                "type": "uint256"
+                            },
+                            {
+                                "internal_type": "",
+                                "name": "quantity",
+                                "type": "uint256"
+                            },
+                            {
+                                "internal_type": "",
+                                "name": "rarity",
+                                "type": "uint8"
+                            }
+                        ]
+                    },
+                    {
+                        "internal_type": "",
+                        "name": "extraData",
+                        "type": "bytes"
+                    }
+                ]
+            },
+            {
+                "internal_type": "",
+                "name": "_signature",
+                "type": "bytes"
+            },
+            {
+                "internal_type": "",
+                "name": "_path",
+                "type": "address[]"
+            }
+        ],
+        "name": "withdraw",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "withdrawalFeeInUsdc",
+        "outputs": [
+            {
+                "internal_type": "",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
