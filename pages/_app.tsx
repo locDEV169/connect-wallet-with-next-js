@@ -1,6 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import { createClient, WagmiConfig } from 'wagmi';
-import { Provider } from 'react-redux';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { configureChains } from '@wagmi/core';
 import {
   arbitrum,
@@ -18,15 +16,15 @@ import {
   optimismGoerli,
   polygon,
   polygonMumbai,
-  sepolia,
+  sepolia
 } from '@wagmi/core/chains';
-import { extendTheme } from '@chakra-ui/react';
-import { publicProvider } from 'wagmi/providers/public';
+import { TrezorProvider } from 'components/Trezor';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
-import { TrezorProvider } from 'components/Trezor';
+import { Provider } from 'react-redux';
 import { store } from 'stores/store';
-
+import { createClient, WagmiConfig } from 'wagmi';
+import { publicProvider } from 'wagmi/providers/public';
 
 const { provider, webSocketProvider } = configureChains(
   [
@@ -66,15 +64,15 @@ const theme = extendTheme({ config });
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
-    <ChakraProvider resetCSS theme={theme}>
-      <WagmiConfig client={client}>
-        <SessionProvider session={pageProps.session} refetchInterval={0}>
-          <TrezorProvider>
-            <Component {...pageProps} />
-          </TrezorProvider>
-        </SessionProvider>
-      </WagmiConfig>
-    </ChakraProvider>
+      <ChakraProvider resetCSS theme={theme}>
+        <WagmiConfig client={client}>
+          <SessionProvider session={pageProps.session} refetchInterval={0}>
+            <TrezorProvider>
+              <Component {...pageProps} />
+            </TrezorProvider>
+          </SessionProvider>
+        </WagmiConfig>
+      </ChakraProvider>
     </Provider>
   );
 };
