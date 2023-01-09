@@ -8,6 +8,8 @@ import { web3Actions } from 'stores/web3-slice';
 import { getEllipsisTxt } from 'utils/format';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import { providers } from 'ethers';
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });
@@ -50,11 +52,10 @@ const ConnectButton = () => {
   };
 
   const handleConnectTrezor = async () => {
-    
     try {
       await getAccounts();
       const account = await getAccounts();
-      console.log('connected Trezor',account);
+      console.log('connected Trezor', account);
       dispatch(web3Actions.setTrezorAccounts(account));
       // const challenge = await requestChallengeAsync({ address: account[0].address, chainId: chain.id });
 
@@ -65,7 +66,6 @@ const ConnectButton = () => {
       // const signature = await signMessageAsync({ message: challenge.message });
 
       // await signIn('moralis-auth', { message: challenge.message, signature, network: 'Evm', redirect: false });
-      
     } catch (e) {
       toast({
         title: 'Oops, something went wrong...',
@@ -75,7 +75,35 @@ const ConnectButton = () => {
         isClosable: true,
       });
     }
-  }
+  };
+
+  const handleConnectWallet = async () => {
+    try {
+      // const { default: WalletConnectProvider } = await import('@walletconnect/web3-provider');
+
+      const walletConnectProvider = await new WalletConnectProvider({
+        //hard code
+        infuraId: '8043bb2cf99347b1bfadfb233c5325c0',
+        chainId: 1,
+        rpc: {
+          137: 'https://matic-mainnet.chainstacklabs.com',
+        },
+        // infuraId: 137,
+      });
+      
+
+      await walletConnectProvider.enable();
+
+      console.log('walletConnectProvider', walletConnectProvider);
+      console.log('uri', walletConnectProvider.infuraId);
+
+      
+
+      return walletConnectProvider;
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
   const handleDisconnect = async () => {
     await disconnectAsync();
@@ -95,6 +123,9 @@ const ConnectButton = () => {
     <Fragment>
       <Button size="sm" onClick={handleAuth} colorScheme="blue">
         Connect Wallet
+      </Button>
+      <Button size="sm" onClick={handleConnectWallet} colorScheme="blue">
+        Connect WalletConnect
       </Button>
       <Button size="sm" onClick={handleConnectTrezor} colorScheme="blue">
         Connect Trezor
