@@ -24,7 +24,6 @@ const ConnectButton = () => {
   const dispatch = useDispatch();
 
   const [provider, setProvider] = useState<providers.Web3Provider>();
-  const [account, setAccount] = useState<string>('');
 
   const handleAuth = async () => {
     // await getAccounts();
@@ -94,7 +93,7 @@ const ConnectButton = () => {
       // if (isConnected) {
       //   await disconnectAsync();
       // }
-      
+
       // // Subscribe to accounts change
       // walletConnectProvider.on('accountsChanged', (accounts: string[]) => {
       //   console.log(accounts);
@@ -119,7 +118,6 @@ const ConnectButton = () => {
       // setProvider(web3Provider);
 
       // return walletConnectProvider;
-
 
       const { account, chain } = await connectAsync({
         connector: new WalletConnectConnector({
@@ -147,13 +145,13 @@ const ConnectButton = () => {
 
   useEffect(() => {
     if (!provider) return;
-    console.log('--------provider', provider, 'account', account, 'ad', address);
+    console.log('--------provider', provider, 'ad', address);
 
     (async () => {
       try {
         const block = await provider.getBlockNumber();
         console.log('last block:', block);
-        console.log('data', data);
+        console.log('last data', data);
       } catch (error) {
         console.log(error);
       }
@@ -170,15 +168,6 @@ const ConnectButton = () => {
       <HStack onClick={handleDisconnect} cursor={'pointer'}>
         <Avatar size="xs" />
         <Text fontWeight="medium">{getEllipsisTxt(data.user.address)}</Text>
-      </HStack>
-    );
-  }
-
-  if (account) {
-    return (
-      <HStack onClick={handleDisconnect} cursor={'pointer'}>
-        <Avatar size="xs" />
-        <Text fontWeight="medium">{getEllipsisTxt(account)}</Text>
       </HStack>
     );
   }
