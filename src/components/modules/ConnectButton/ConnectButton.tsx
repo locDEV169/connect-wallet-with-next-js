@@ -2,7 +2,7 @@ import { Avatar, Button, HStack, Text, useToast } from '@chakra-ui/react';
 import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
 import { useTrezor } from 'components/Trezor';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { web3Actions } from 'stores/web3-slice';
 import { getEllipsisTxt } from 'utils/format';
@@ -21,6 +21,8 @@ const ConnectButton = () => {
   const { requestChallengeAsync } = useAuthRequestChallengeEvm();
   const { getAccounts } = useTrezor();
   const dispatch = useDispatch();
+
+  const [provider, setProvider] = useState<providers.Web3Provider>();
 
   const handleAuth = async () => {
     // await getAccounts();
@@ -83,27 +85,52 @@ const ConnectButton = () => {
 
       const walletConnectProvider = await new WalletConnectProvider({
         //hard code
-        infuraId: '8043bb2cf99347b1bfadfb233c5325c0',
-        chainId: 1,
-        rpc: {
-          137: 'https://matic-mainnet.chainstacklabs.com',
-        },
-        // infuraId: 137,
+        // set up infura.io
+        infuraId: 'fa81668a88f749e092d99583b6fa8279',
+        // chainId: 1,
       });
-      
+
+      // Subscribe to accounts change
+      walletConnectProvider.on('accountsChanged', (accounts: string[]) => {
+        console.log(accounts);
+      });
+
+      // Subscribe to chainId change
+      walletConnectProvider.on('chainChanged', (chainId: number) => {
+        console.log(chainId);
+      });
+
+      // Subscribe to session disconnection
+      walletConnectProvider.on('disconnect', (code: number, reason: string) => {
+        console.log(code, reason);
+      });
 
       await walletConnectProvider.enable();
 
       console.log('walletConnectProvider', walletConnectProvider);
-      console.log('uri', walletConnectProvider.infuraId);
 
-      
+      const web3Provider = new providers.Web3Provider(walletConnectProvider);
+      setProvider(web3Provider);
 
       return walletConnectProvider;
     } catch (e) {
       console.warn(e);
     }
   };
+
+  useEffect(() => {
+    if (!provider) return;
+    console.log('--------provider', provider);
+
+    (async () => {
+      try {
+        const block = await provider.getBlockNumber();
+        console.log('last block:', block);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [provider]);
 
   const handleDisconnect = async () => {
     await disconnectAsync();
