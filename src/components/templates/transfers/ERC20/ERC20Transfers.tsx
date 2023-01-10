@@ -22,11 +22,15 @@ const ERC20Transfers = () => {
   const { data } = useSession();
   const { chain } = useNetwork();
   const { data: transfers } = useEvmWalletTokenTransfers({
+    // address: data?.user?.address || '0x40f3D8732bca994d8baFd1Ab802B8c4229E5D92C',
+    // chain: chain?.id || 5,
     address: data?.user?.address,
     chain: chain?.id,
   });
 
-  useEffect(() => console.log('transfers: ', transfers), [transfers]);
+  useEffect(() => {
+    console.log('transfers: ', transfers);
+  }, [transfers]);
 
   return (
     <>
