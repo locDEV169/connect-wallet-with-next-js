@@ -26,8 +26,6 @@ const ConnectButton = () => {
   const [provider, setProvider] = useState<providers.Web3Provider>();
 
   const handleAuth = async () => {
-    // await getAccounts();
-
     if (isConnected) {
       await disconnectAsync();
     }
@@ -118,6 +116,9 @@ const ConnectButton = () => {
       // setProvider(web3Provider);
 
       // return walletConnectProvider;
+      if (isConnected) {
+        await disconnectAsync();
+      }
 
       const { account, chain } = await connectAsync({
         connector: new WalletConnectConnector({
@@ -128,8 +129,7 @@ const ConnectButton = () => {
       });
       console.log('-------------- ', account, chain);
 
-      // const challenge = await requestChallengeAsync({ address: account, chainId: chain.id });
-      const challenge = await requestChallengeAsync({ address: account, chainId: 97 });
+      const challenge = await requestChallengeAsync({ address: account, chainId: chain.id });
       console.log('challenge', challenge);
       if (!challenge) {
         throw new Error('No challenge received');
