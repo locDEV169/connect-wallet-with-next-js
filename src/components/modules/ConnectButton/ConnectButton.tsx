@@ -9,12 +9,13 @@ import { getEllipsisTxt } from 'utils/format';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { providers } from 'ethers';
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });
   const { disconnectAsync } = useDisconnect();
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { signMessageAsync } = useSignMessage();
   const toast = useToast();
   const { data } = useSession();
@@ -23,6 +24,7 @@ const ConnectButton = () => {
   const dispatch = useDispatch();
 
   const [provider, setProvider] = useState<providers.Web3Provider>();
+  const [account, setAccount] = useState<string>('');
 
   const handleAuth = async () => {
     // await getAccounts();
@@ -83,36 +85,61 @@ const ConnectButton = () => {
     try {
       // const { default: WalletConnectProvider } = await import('@walletconnect/web3-provider');
 
-      const walletConnectProvider = await new WalletConnectProvider({
-        //hard code
-        // set up infura.io
-        infuraId: 'fa81668a88f749e092d99583b6fa8279',
-        // chainId: 1,
+      // const walletConnectProvider = await new WalletConnectProvider({
+      //   //hard code
+      //   // set up infura.io
+      //   infuraId: 'fa81668a88f749e092d99583b6fa8279',
+      //   // chainId: 1,
+      // });
+      // if (isConnected) {
+      //   await disconnectAsync();
+      // }
+      
+      // // Subscribe to accounts change
+      // walletConnectProvider.on('accountsChanged', (accounts: string[]) => {
+      //   console.log(accounts);
+      //   setAccount(accounts[0]);
+      // });
+
+      // // Subscribe to chainId change
+      // walletConnectProvider.on('chainChanged', (chainId: number) => {
+      //   console.log(chainId);
+      // });
+
+      // // Subscribe to session disconnection
+      // walletConnectProvider.on('disconnect', (code: number, reason: string) => {
+      //   console.log(code, reason);
+      // });
+
+      // await walletConnectProvider.enable();
+
+      // console.log('walletConnectProvider', walletConnectProvider);
+
+      // const web3Provider = new providers.Web3Provider(walletConnectProvider);
+      // setProvider(web3Provider);
+
+      // return walletConnectProvider;
+
+
+      const { account, chain } = await connectAsync({
+        connector: new WalletConnectConnector({
+          options: {
+            qrcode: true,
+          },
+        }),
       });
+      console.log('-------------- ', account, chain);
 
-      // Subscribe to accounts change
-      walletConnectProvider.on('accountsChanged', (accounts: string[]) => {
-        console.log(accounts);
-      });
+      // const challenge = await requestChallengeAsync({ address: account, chainId: chain.id });
+      const challenge = await requestChallengeAsync({ address: account, chainId: 97 });
+      console.log('challenge', challenge);
+      if (!challenge) {
+        throw new Error('No challenge received');
+      }
 
-      // Subscribe to chainId change
-      walletConnectProvider.on('chainChanged', (chainId: number) => {
-        console.log(chainId);
-      });
+      const signature = await signMessageAsync({ message: challenge.message });
 
-      // Subscribe to session disconnection
-      walletConnectProvider.on('disconnect', (code: number, reason: string) => {
-        console.log(code, reason);
-      });
-
-      await walletConnectProvider.enable();
-
-      console.log('walletConnectProvider', walletConnectProvider);
-
-      const web3Provider = new providers.Web3Provider(walletConnectProvider);
-      setProvider(web3Provider);
-
-      return walletConnectProvider;
+      await signIn('moralis-auth', { message: challenge.message, signature, network: 'Evm', redirect: false });
     } catch (e) {
       console.warn(e);
     }
@@ -120,12 +147,13 @@ const ConnectButton = () => {
 
   useEffect(() => {
     if (!provider) return;
-    console.log('--------provider', provider);
+    console.log('--------provider', provider, 'account', account, 'ad', address);
 
     (async () => {
       try {
         const block = await provider.getBlockNumber();
         console.log('last block:', block);
+        console.log('data', data);
       } catch (error) {
         console.log(error);
       }
@@ -142,6 +170,15 @@ const ConnectButton = () => {
       <HStack onClick={handleDisconnect} cursor={'pointer'}>
         <Avatar size="xs" />
         <Text fontWeight="medium">{getEllipsisTxt(data.user.address)}</Text>
+      </HStack>
+    );
+  }
+
+  if (account) {
+    return (
+      <HStack onClick={handleDisconnect} cursor={'pointer'}>
+        <Avatar size="xs" />
+        <Text fontWeight="medium">{getEllipsisTxt(account)}</Text>
       </HStack>
     );
   }
