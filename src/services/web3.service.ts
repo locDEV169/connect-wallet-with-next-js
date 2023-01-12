@@ -1,10 +1,10 @@
 import ERC20ABI_2 from './axiewithdraw.json';
 import axios from 'axios';
-// import { web3Read } from 'utils';
+import { web3Read } from '../utils';
 
 export const AXIE_WITHDRAW_CONTRACT_ADDRESS = '0x36b628e771b0ca12a135e0a7b8e0394f99dce95b';
 
-// export const WITHDRAW_CONTRACT = new web3Read.eth.Contract(ERC20ABI_2 as any, AXIE_WITHDRAW_CONTRACT_ADDRESS);
+export const WITHDRAW_CONTRACT = new web3Read.eth.Contract(ERC20ABI_2 as any, AXIE_WITHDRAW_CONTRACT_ADDRESS);
 
 export const getRawAddressFromRoninAddress = (address: string): string => {
   if (!address) return '';
@@ -43,7 +43,7 @@ export const readNativeTokenBalance = async (address: string, chain = 'ronin') =
       id: 1,
     });
 
-    // results.amount = web3Read.utils.fromWei(web3Read.utils.hexToNumberString(balanceRes?.data?.result), 'ether');
+    results.amount = web3Read.utils.fromWei(web3Read.utils.hexToNumberString(balanceRes?.data?.result), 'ether');
   }
 
   return results;
