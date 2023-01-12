@@ -2,7 +2,7 @@ import { Box, HStack, Image, SimpleGrid, useColorModeValue } from '@chakra-ui/re
 import { EvmNft } from '@moralisweb3/common-evm-utils';
 import { Eth } from '@web3uikit/icons';
 import { FC } from 'react';
-import { resolveIPFS } from 'utils/resolveIPFS';
+import { resolveIPFS } from '../../../utils/resolveIPFS';
 
 export interface NFTCardParams {
   key: number;

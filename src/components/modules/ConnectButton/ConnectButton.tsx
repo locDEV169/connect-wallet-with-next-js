@@ -1,16 +1,16 @@
 import { Avatar, Button, HStack, Text, useToast } from '@chakra-ui/react';
 import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
-import { useTrezor } from 'components/Trezor';
+import { useTrezor } from '../../../components/Trezor';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { web3Actions } from 'stores/web3-slice';
-import { getEllipsisTxt } from 'utils/format';
+import { web3Actions } from '../../../stores/web3-slice';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { providers } from 'ethers';
+import { getEllipsisTxt } from '../../../utils/format';
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });

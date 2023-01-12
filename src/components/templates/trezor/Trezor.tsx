@@ -1,9 +1,9 @@
 import { Box, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react';
 import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
-import { useTrezor } from 'components/Trezor';
-import { useTrezorAccount } from 'hooks/useTrezor';
 import { useSession } from 'next-auth/react';
 import { useNetwork, useSignMessage } from 'wagmi';
+import { useTrezorAccount } from '../../../hooks/useTrezor';
+import { useTrezor } from '../../Trezor';
 
 const TrezorAccount = () => {
   const hoverTrColor = useColorModeValue('gray.100', 'gray.700');

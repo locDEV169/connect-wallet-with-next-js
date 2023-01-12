@@ -6,8 +6,8 @@ import {
   getRawSignature,
   readNativeTokenBalance,
   WITHDRAW_CONTRACT,
-} from 'services';
-import { axieWithdrawToken } from 'services/axie.service';
+} from '../../services';
+import { axieWithdrawToken } from '../../services/axie.service';
 import TrezorConnect, {
   EthereumAddress,
   EthereumTransaction,

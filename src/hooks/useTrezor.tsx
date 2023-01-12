@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { get50Accounts } from '../services';
-import { web3Actions } from 'stores/web3-slice';
+import { web3Actions } from '../stores';
 
 export const useTrezorAccount = () => {
   const { trezorAccounts } = useSelector((state: any) => state.web3);

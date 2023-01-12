@@ -14,8 +14,8 @@ import {
 import { useEvmWalletTransactions } from '@moralisweb3/next';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import { getEllipsisTxt } from 'utils/format';
 import { useNetwork } from 'wagmi';
+import { getEllipsisTxt } from '../../../utils/format';
 
 const Transactions = () => {
   const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
