@@ -11,6 +11,8 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { providers } from 'ethers';
 import { getEllipsisTxt } from '../../../utils/format';
+import Router from 'next/router';
+
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });
@@ -53,6 +55,7 @@ const ConnectButton = () => {
   };
 
   const handleConnectTrezor = async () => {
+    Router.replace('/trezor');
     try {
       await getAccounts();
       const account = await getAccounts();
